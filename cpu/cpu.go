@@ -1,7 +1,7 @@
 package cpu
 
 type Cpu struct {
-	ram memory
+	ram [4096]uint16
 }
 
 func decodeInstruction(instruction uint16) (uint16, [3]uint16) {
@@ -20,7 +20,7 @@ func (c Cpu) executeInstruction(instruction uint16) {
 			c.returnFromASubroutine()
 		}
 	case 1:
-		c.jump()
+		c.jump(vars)
 	case 2:
 		c.callSubRoutine()
 	case 3:
@@ -48,11 +48,15 @@ func (c Cpu) executeInstruction(instruction uint16) {
 		case 5:
 			c.subReg()
 		case 6:
+			c.shiftRight()
 		case 7:
+			c.subN()
 		case 14:
+			c.shiftRight()
 		default:
 		}
 	case 9:
+		c.skipNextInstructionIfNotEqualReg()
 	case 10:
 	case 11:
 	case 12:

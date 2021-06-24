@@ -8,7 +8,7 @@ func (c Cpu) returnFromASubroutine() {
 
 }
 
-func (c Cpu) jump() {
+func (c Cpu) jump([3]uint16) {
 
 }
 
@@ -58,4 +58,20 @@ func (c Cpu) addReg() {
 
 func (c Cpu) subReg() {
 	
+}
+
+func (c Cpu) shiftRight() {
+
+}
+
+func (c Cpu) subN() {
+
+}
+
+func (c Cpu) shiftLeft() {
+
+}
+
+func (c Cpu) skipNextInstructionIfNotEqualReg() {
+
 }
