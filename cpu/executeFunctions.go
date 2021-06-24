@@ -8,28 +8,36 @@ func (c Cpu) returnFromASubroutine() {
 
 }
 
-func (c Cpu) jump([3]uint16) {
-
+func (c Cpu) jump(nnn uint16) {
+	c.regs.programCounter = nnn
 }
 
-func (c Cpu) callSubRoutine() {
-
+func (c Cpu) callSubRoutine(nnn uint16) {
+	c.stack[c.regs.stackPointer] = c.regs.programCounter
+	c.regs.stackPointer++
+	c.regs.programCounter = nnn
 }
 
-func (c Cpu) skipNextInstructionIfEqualImmediate() {
-
+func (c Cpu) skipNextInstructionIfEqualImmediate(x uint16, kk uint16) {
+	if c.regs.generalRegs[x] == kk {
+		c.regs.programCounter += 2
+	}
 }
 
-func (c Cpu) skipNextInstructionIfNotEqualImmediate() {
-
+func (c Cpu) skipNextInstructionIfNotEqualImmediate(x uint16, kk uint16) {
+	if c.regs.generalRegs[x] != kk {
+		c.regs.programCounter += 2
+	}
 }
 
-func (c Cpu) skipNextInstructionIfEqualReg() {
-	
+func (c Cpu) skipNextInstructionIfEqualReg(x uint16, y uint16) {
+	if c.regs.generalRegs[x] == c.regs.generalRegs[y] {
+		c.regs.programCounter += 2
+	}
 }
 
-func (c Cpu) loadImmediate() {
-
+func (c Cpu) loadImmediate(x uint16, kk uint16) {
+	c.regs.generalRegs[x] = kk
 }
 
 func (c Cpu) addImmediate() {
